@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "All back-end files for ironic anagrams",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,6 +21,12 @@
     "express": "^4.14.0",
     "localtunnel": "^1.8.1",
     "morgan": "^1.7.0",
+    "pg": "^6.1.0",
+    "pg-hstore": "^2.3.2",
+    "pg-native": "^1.10.0",
     "sequelize": "^3.24.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.10.2"
   }
 }
