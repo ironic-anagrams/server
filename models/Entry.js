@@ -1,19 +1,25 @@
-var Sequelize = require('sequelize');
-var sequelize = require('../config/db.js');
-var User = require('./User.js');
+// var Sequelize = require('sequelize');
+// var sequelize = require('../config/db.js');
+//var User = require('./User.js');
 
-// Define the model that corresponds to the entry table in the database. 
-var Entry = sequelize.define('entry', {
-  user_id: Sequelize.INTEGER,
-  text: Sequelize.STRING
-});
+// Define the model that corresponds to the entry table in the database.
+// var Entry = sequelize.define('entry', {
+//   //user_id: Sequelize.INTEGER,
+//   text: Sequelize.STRING
+// });
 
-// //Entry.sync();
+
+// puts a UserId column on each Entry instance
+// also gives us the `.setUser` method available
+// after creating a new instance of Entry
+// Entry.belongsTo(User)
+
+// Entry.sync();
 
 // *******===================================================================********//
 // The Following block is handy for initializing your database with some dummy data, //
 // to verify the connection from your server. Once the connection is verified, keep
-// this commented. 
+// this commented.
 //
 // sequelize.sync().then(function() {
 //   return Entry.create({
@@ -26,4 +32,4 @@ var Entry = sequelize.define('entry', {
 //   }));
 // });
 
-module.exports = Entry;
+// module.exports = Entry;

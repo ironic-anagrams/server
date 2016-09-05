@@ -1,4 +1,4 @@
-var Entry = require('../models/Entry.js');
+var db = require('../models/Database.js');
 
 module.exports = {
 
@@ -11,13 +11,13 @@ module.exports = {
       });
   },
 
-  getEntry: function(req, res, next) {
+  getEntries: function(req, res, next) {
     console.log("GET QUERY RECEIVED");
     var queryObject = {};
     if (req.query) {
       queryObject = req.query;
     }
-    Entry.findAll(queryObject)
+    db.Entry.findAll(queryObject)
       .then(function(entries){
         res.send(entries);
       });
