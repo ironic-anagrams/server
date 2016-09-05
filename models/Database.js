@@ -11,9 +11,9 @@ var User = sequelize.define('user', {
 
 // Define the model that corresponds to the entry table in the database.
 var Entry = sequelize.define('entry', {
-  //user_id: Sequelize.INTEGER,
   text: Sequelize.STRING
 });
+
 
 
 // puts a UserId column on each Entry instance
