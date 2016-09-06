@@ -14,6 +14,11 @@ var Entry = sequelize.define('entry', {
   text: Sequelize.STRING
 });
 
+var Relationships = sequelize.define('relationships', {
+  user1: Sequelize.INTEGER,
+  user2: Sequelize.INTEGER
+});
+
 
 
 // puts a UserId column on each Entry instance
@@ -25,7 +30,9 @@ User.hasMany(Entry);
 
 User.sync();
 Entry.sync();
+Relationships.sync();
 
 module.exports.User = User;
 
 module.exports.Entry = Entry;
+module.exports.Relationships = Relationships;
