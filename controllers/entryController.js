@@ -19,13 +19,16 @@ module.exports = {
 
   getEntries: function(req, res, next) {
     console.log("GET QUERY RECEIVED");
-    db.Entry.findAll({ where: { userId: req.query.userId }})
+    // TODO: check if req.query.userId is in friendlist
+    var userId = req.query.userId || req.user.id;
+    
+    db.Entry.findAll({ where: { userId: userId }})
       .then(function(entries){
         res.send(entries);
       })
       .catch(function(err){
         res.status(404).json(err)
-      })
+      });
   }
 
 };
