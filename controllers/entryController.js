@@ -6,7 +6,7 @@ module.exports = {
     console.log("POST QUERY RECEIVED");
     var query = req.body;
     query['userId'] = req.user.id;
-    
+
     db.Entry.create(query)
       .then(function(newEntry) {
         console.log("Creating new entry: ", newEntry);
@@ -21,7 +21,7 @@ module.exports = {
     console.log("GET QUERY RECEIVED");
     // TODO: check if req.query.userId is in friendlist
     var userId = req.query.userId || req.user.id;
-    
+
     db.Entry.findAll({ where: { userId: userId }})
       .then(function(entries){
         res.send(entries);
