@@ -1,6 +1,8 @@
 var entryController = require('../controllers/entryController.js');
 var userController = require('../controllers/userController.js');
 var friendsController = require('../controllers/friendsController.js');
+var requestController = require('../controllers/requestController.js');
+
 var utils = require('./utils.js');
 
 module.exports = function(app, express) {
@@ -18,6 +20,9 @@ module.exports = function(app, express) {
   app.get('/api/friends', friendsController.fetchFriends);
   app.post('/api/friends', friendsController.acceptFriendReq);
   //Add an app.delete endpoint later for removing friendsRelationships
+
+  app.post('/api/friendreq', requestController.sendRequest);
+  app.get('/api/friendreq', requestController.getRequests);
 
 
 

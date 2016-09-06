@@ -38,6 +38,10 @@ module.exports = {
       user1: req.body.user2,
       user2: req.body.user1
     }
+    //Need to adjust this to base it off accepting users userid
+    //from token
+    //also need to adjust to delete this request from
+    //request database (should be another function)
 
     var query = [req.body,rev]
     //Need to create two entries in relationships.
