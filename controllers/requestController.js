@@ -15,7 +15,7 @@ module.exports = {
       })
   },
 
-  getRequests: function(req, res, next){
+  getRequests: function(req, res, next) {
     // db.Request.findAll({where: {requestReceiver: req.user.id}})
     //   .then(function(requestList){
     //     var query = requestList.reduce(function(total,request){
@@ -53,5 +53,32 @@ module.exports = {
       .catch(function(err) {
         res.status(404).json(err);
       });
+  },
+
+  acceptRequest: function(req, res, next) {
+    db.Request.findOne({ where: req.body.requestId })
+      .then(function(result) {
+        if (result) {
+          if (result.requestReceiver === req.user.id) {
+            // create entries in friends table
+            return db.Relationships.bulkCreate([
+                { user1: result.userId, user2: result.requestReceiver },
+                { user1: result.requestReceiver, user2: result.userId }
+              ])
+              .then(function(){
+                res.status(201).send("Success")
+              })
+              .catch(function(err){
+                res.status(404).json(err)
+              })
+          } else {
+            return res.status(404).json({ error: 'You are not receiver of this request'});
+          }
+        }
+        res.status(404).json({ error: 'Request not found'});
+      })
+      .catch(function(err) {
+        res.status(404).json(err);
+      })
   }
 }
