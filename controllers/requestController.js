@@ -7,30 +7,18 @@ module.exports = {
       requestReceiver: req.body.requestReceiver,
       status: 'CREATED'
     }
-    // check if you are friends
-    db.Relationships.findOne({
-      where: { user1: newRequest.userId, user2: newRequest.requestReceiver }
+    // check if request already exists
+    db.Request.findOrCreate({
+      where: newRequest
     })
-      .then(function(friends) {
-        if (friends) {
-          return res.status(404).json({ error: 'Already friends'});
+      .spread(function(request, created){
+        if (created) { 
+          return res.status(201).send("Success") 
+        } else {
+          res.status(404).json({ error: 'Already created'});
         }
-        // check if request already exists
-        db.Request.findOrCreate({
-          where: newRequest
-        })
-          .spread(function(request, created){
-            if (created) { 
-              return res.status(201).send("Success") 
-            } else {
-              res.status(404).json({ error: 'Already created'});
-            }
-          })
-          .catch(function(err){
-            res.status(404).json(err)
-          });
       })
-      .catch(function(err) {
+      .catch(function(err){
         res.status(404).json(err)
       });
 
