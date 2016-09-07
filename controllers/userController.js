@@ -4,10 +4,8 @@ var jwt = require('jwt-simple');
 module.exports = {
 
   createUser : function(req, res, next){
-    console.log("POST QUERY RECEIVED");
     db.User.create(req.body)
       .then(function(newUser){
-        console.log("Creating new User: ", newUser);
         //add error handling logic
         var token = jwt.encode(newUser, 'secret');
         res.status(201).json({
@@ -20,14 +18,16 @@ module.exports = {
       })
   },
 
-  findUser : function(req, res, next){
-    console.log("GET QUERY RECEIVED");
-    var username = req.query.username
-
-    db.User.findOne({ where: {username: username}})
+  findUser: function(req, res, next){
+    var username = req.query.username;
+    if (!username) {
+      return res.status(200).json([]);
+    }
+    db.User.findAll({ 
+      attributes: ['id', 'username', 'fullname'],
+      where: {username: { $iLike: '%' + username + '%' }}
+    })
       .then(function(result){
-        //refactor later to  returns a list of matching queries
-        //instead of just findOne
         res.status(200).json(result);
       })
       .catch(function(err){

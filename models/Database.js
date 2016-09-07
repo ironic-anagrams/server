@@ -19,7 +19,8 @@ var Relationships = sequelize.define('relationships', {
 });
 
 var Request = sequelize.define('request', {
-  requestReceiver: Sequelize.INTEGER
+  requestReceiver: Sequelize.INTEGER,
+  status: Sequelize.STRING
 })
 
 
