@@ -1,8 +1,12 @@
 var db = require('../models/Database.js');
 
 module.exports = {
-  sendRequest: function(req, res, next){
-    db.Request.create(req.body)
+  sendRequest: function(req, res, next) {
+    var newRequest = {
+      userId: req.user.id,
+      requestReceiver: req.body.requestReceiver
+    }
+    db.Request.create(newRequest)
       .then(function(newRequest){
         res.status(201).send("Success")
       })
