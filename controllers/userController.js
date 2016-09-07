@@ -23,7 +23,10 @@ module.exports = {
     if (!username) {
       return res.status(200).json([]);
     }
-    db.User.findAll({ where: {username: { $iLike: '%' + username + '%' }}})
+    db.User.findAll({ 
+      attributes: ['id', 'username', 'fullname'],
+      where: {username: { $iLike: '%' + username + '%' }}
+    })
       .then(function(result){
         res.status(200).json(result);
       })
