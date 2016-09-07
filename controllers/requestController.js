@@ -4,7 +4,8 @@ module.exports = {
   sendRequest: function(req, res, next) {
     var newRequest = {
       userId: req.user.id,
-      requestReceiver: req.body.requestReceiver
+      requestReceiver: req.body.requestReceiver,
+      status: 'CREATED'
     }
     db.Request.create(newRequest)
       .then(function(newRequest){
@@ -41,7 +42,7 @@ module.exports = {
     //     res.status(404).json(err)
     //   })
     db.Request.findAll({
-      where: { requestReceiver: req.user.id },
+      where: { requestReceiver: req.user.id, status: 'CREATED' },
       include: {
         model: db.User,
         attributes: ['fullname']
@@ -66,7 +67,16 @@ module.exports = {
                 { user1: result.requestReceiver, user2: result.userId }
               ])
               .then(function(){
-                res.status(201).send("Success")
+                // update status in requests
+                db.Request.update({ status: 'ACCEPTED'}, {
+                  where: { id: result.id }
+                })
+                  .then(function() {
+                    res.status(201).send("Success");
+                  })
+                  .catch(function(err) {
+                    res.status(404).json(err);
+                  })
               })
               .catch(function(err){
                 res.status(404).json(err)
