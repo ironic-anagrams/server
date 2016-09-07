@@ -7,9 +7,15 @@ module.exports = {
       requestReceiver: req.body.requestReceiver,
       status: 'CREATED'
     }
-    db.Request.create(newRequest)
-      .then(function(newRequest){
-        res.status(201).send("Success")
+    db.Request.findOrCreate({
+      where: newRequest
+    })
+      .spread(function(request, created){
+        if (created) { 
+          return res.status(201).send("Success") 
+        } else {
+          res.status(404).json({ error: 'Already created'});
+        }
       })
       .catch(function(err){
         res.status(404).json(err)
@@ -17,30 +23,6 @@ module.exports = {
   },
 
   getRequests: function(req, res, next) {
-    // db.Request.findAll({where: {requestReceiver: req.user.id}})
-    //   .then(function(requestList){
-    //     var query = requestList.reduce(function(total,request){
-    //       total.push(request.dataValues.userId)
-    //       return total;
-    //     },[])
-    //     db.User.findAll({
-    //       where: {
-    //           id: {
-    //             $any: query
-    //           }
-    //       }
-    //     })
-    //       .then(function(requests){
-    //         console.log("This is the friendslist", requests)
-    //         res.status(201).json(requests)
-    //       })
-    //       .catch(function(err){
-    //         res.status(404).json(err)
-    //       })
-    //   })
-    //   .catch(function(err){
-    //     res.status(404).json(err)
-    //   })
     db.Request.findAll({
       where: { requestReceiver: req.user.id, status: 'CREATED' },
       include: {
