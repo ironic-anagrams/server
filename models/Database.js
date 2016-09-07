@@ -34,6 +34,20 @@ var Request = sequelize.define('request', {
             next();
           }
         })
+    },
+    mustNotBeDuplicateRequest: function(next) {
+      Request.findOne({ where: {
+        userId: this.userId,
+        requestReceiver: this.requestReceiver,
+        status: this.status
+      } })
+        .then(function(exists) {
+          if (exists) {
+            next('Request already exists');
+          } else {
+            next();
+          }
+        })
     }
   }
 })

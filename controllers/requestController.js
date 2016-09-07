@@ -7,16 +7,9 @@ module.exports = {
       requestReceiver: req.body.requestReceiver,
       status: 'CREATED'
     }
-    // check if request already exists
-    db.Request.findOrCreate({
-      where: newRequest
-    })
-      .spread(function(request, created){
-        if (created) { 
-          return res.status(201).send("Success") 
-        } else {
-          res.status(404).json({ error: 'Already created'});
-        }
+    db.Request.create(newRequest)
+      .then(function(){
+          res.status(201).send("Success");
       })
       .catch(function(err){
         res.status(404).json(err)
