@@ -29,7 +29,10 @@ module.exports = {
           console.log('friends', friends);
           if (friends) {
             // send entries
-            db.Entry.findAll({ where: { userId: req.query.userId }})
+            db.Entry.findAll({ 
+              where: { userId: req.query.userId },
+              order: [['createdAt', 'DESC']]
+            })
               .then(function(entries){
                 res.send(entries);
               })
@@ -44,7 +47,10 @@ module.exports = {
           res.status(404).json(err)
         });
     } else {
-      db.Entry.findAll({ where: { userId: req.user.id }})
+      db.Entry.findAll({ 
+        where: { userId: req.user.id },
+        order: [['createdAt', 'DESC']]
+      })
       .then(function(entries){
         res.send(entries);
       })
