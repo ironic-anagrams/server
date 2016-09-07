@@ -12,6 +12,7 @@ module.exports = {
           return total;
         },[])
         db.User.findAll({
+          attributes: ['id', 'username', 'fullname'],
           where: {
               id: {
                 $any: query
@@ -19,7 +20,6 @@ module.exports = {
           }
         })
           .then(function(friendList){
-            console.log("This is the friendslist", friendList)
             res.status(201).json(friendList)
           })
           .catch(function(err){
