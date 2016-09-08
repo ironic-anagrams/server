@@ -21,6 +21,35 @@ var Relationships = sequelize.define('relationships', {
 var Request = sequelize.define('request', {
   requestReceiver: Sequelize.INTEGER,
   status: Sequelize.STRING
+}, {
+  validate: {
+    requestReceiverMustNotBeFriend: function(next) {
+      Relationships.findOne({
+        where: { user1: this.userId, user2: this.requestReceiver }
+      })
+        .then(function(friends){
+          if (friends) {
+            next('requestReceiver must NOT be a friend');
+          } else {
+            next();
+          }
+        })
+    },
+    mustNotBeDuplicateRequest: function(next) {
+      Request.findOne({ where: {
+        userId: this.userId,
+        requestReceiver: this.requestReceiver,
+        status: this.status
+      } })
+        .then(function(exists) {
+          if (exists) {
+            next('Request already exists');
+          } else {
+            next();
+          }
+        })
+    }
+  }
 })
 
 
