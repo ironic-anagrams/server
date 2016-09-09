@@ -7,30 +7,11 @@ module.exports = {
       requestReceiver: req.body.requestReceiver,
       status: 'CREATED'
     }
-    // check if you are friends
-    db.Relationships.findOne({
-      where: { user1: newRequest.userId, user2: newRequest.requestReceiver }
-    })
-      .then(function(friends) {
-        if (friends) {
-          return res.status(404).json({ error: 'Already friends'});
-        }
-        // check if request already exists
-        db.Request.findOrCreate({
-          where: newRequest
-        })
-          .spread(function(request, created){
-            if (created) { 
-              return res.status(201).send("Success") 
-            } else {
-              res.status(404).json({ error: 'Already created'});
-            }
-          })
-          .catch(function(err){
-            res.status(404).json(err)
-          });
+    db.Request.create(newRequest)
+      .then(function(){
+          res.status(201).send("Success");
       })
-      .catch(function(err) {
+      .catch(function(err){
         res.status(404).json(err)
       });
 
@@ -57,25 +38,22 @@ module.exports = {
       .then(function(result) {
         if (result) {
           if (result.requestReceiver === req.user.id) {
-            // create entries in friends table
-            return db.Relationships.bulkCreate([
-                { user1: result.userId, user2: result.requestReceiver },
-                { user1: result.requestReceiver, user2: result.userId }
-              ])
-              .then(function(){
-                // update status in requests
-                db.Request.update({ status: 'ACCEPTED'}, {
-                  where: { id: result.id }
-                })
-                  .then(function() {
+            return result.update({ status: 'ACCEPTED'})
+              .then(function() {
+                // create entries in friends table
+                db.Relationships.bulkCreate([
+                    { user1: result.userId, user2: result.requestReceiver },
+                    { user1: result.requestReceiver, user2: result.userId }
+                  ])
+                  .then(function(){
                     res.status(201).send("Success");
                   })
-                  .catch(function(err) {
-                    res.status(404).json(err);
+                  .catch(function(err){
+                    res.status(404).json(err)
                   })
               })
-              .catch(function(err){
-                res.status(404).json(err)
+              .catch(function(err) {
+                res.status(404).json(err);
               })
           } else {
             return res.status(404).json({ error: 'You are not receiver of this request'});
