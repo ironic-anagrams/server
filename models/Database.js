@@ -23,8 +23,6 @@ var Request = sequelize.define('request', {
   status: Sequelize.STRING
 })
 
-
-
 // puts a UserId column on each Entry instance
 // also gives us the `.setUser` method available
 // after creating a new instance of Entry
