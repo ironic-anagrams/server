@@ -10,7 +10,8 @@ var User = sequelize.define('user', {
 
 // Define the model that corresponds to the entry table in the database.
 var Entry = sequelize.define('entry', {
-  text: Sequelize.STRING
+  text: Sequelize.STRING,
+  location: Sequelize.STRING
 });
 
 var Relationships = sequelize.define('relationships', {
