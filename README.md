@@ -46,6 +46,9 @@ All back-end files for ironic anagrams
       headers: {
         'Content-Type': 'application/json',
       },
-      body: newUser
+      body: {
+        username: this.state.username,
+        password: this.state.password
+      }
     })
   ```
