@@ -52,8 +52,6 @@ All back-end files for ironic anagrams
       }
     })
   ```
-# server
-All back-end files for ironic anagrams
 
 **Sign Up**
 ----
