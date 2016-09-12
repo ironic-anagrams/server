@@ -16,17 +16,12 @@ module.exports = {
   },
 
   getEntries: function(req, res, next) {
-    
-    //var userId = req.query.userId || req.user.id;
-    console.log('req.query.userId:', req.query.userId);
-    console.log('req.user.id:', req.user.id);
     if (req.query.userId && (req.query.userId !== req.user.id.toString())) {
       // check if req.query.userId is in friendlist
       db.Relationships.findOne({ 
         where: { user1: req.user.id, user2: req.query.userId }
       })
         .then(function(friends) {
-          console.log('friends', friends);
           if (friends) {
             // send entries
             db.Entry.findAll({ 
@@ -47,7 +42,6 @@ module.exports = {
           res.status(404).json(err)
         });
     } else {
-      console.log(" IN ELSE ")
       db.Entry.findAll({ 
         where: { userId: req.user.id },
         order: [['createdAt', 'DESC']]

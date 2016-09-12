@@ -19,7 +19,6 @@ module.exports = function(app, express) {
   app.use('/api/friends', utils.decode);
   app.get('/api/friends', friendsController.fetchFriends);
   app.post('/api/friends', friendsController.acceptFriendReq);
-  //Add an app.delete endpoint later for removing friendsRelationships
 
   app.use('/api/friendreq', utils.decode);
   app.post('/api/friendreq', function(req, res, next) {
