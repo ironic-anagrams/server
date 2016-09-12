@@ -8,6 +8,7 @@
 - [**Create Entry**](#create-entry)
 - [**Fetch Friends**](#fetch-friends)
 - [**Find Users**](#find-users)
+- [**Submit Friend Request**](#submit-friend-request)
 
 **Log In**
 ----
@@ -333,6 +334,55 @@
       headers: {
         'Content-Type': 'application/json',
         'x-access-token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAsInVzZXJuYW1lIjoidGVzdDUiLCJwYXNzd29yZCI6InBhc3MiLCJmdWxsbmFtZSI6ImhlbGxvIiwiY3JlYXRlZEF0IjoiMjAxNi0wOS0wNFQyMzo0MToyNS41NDJaIiwidXBkYXRlZEF0IjoiMjAxNi0wOS0wNFQyMzo0MToyNS41NDJaIn0.yjfFIaKJJxHzp5UPegVwzL9rMWXsALgLTo3emwJV0-w'
+      }
+    })
+  ```
+
+**Submit Friend Request**
+----
+  Creates a friend request
+
+* **URL**
+
+  /api/friendreq
+
+* **Method:**
+  
+  `POST`
+  
+*  **URL Params**
+
+   None
+   
+*  **Request Headers**
+
+   **Required:**
+ 
+   `x-access-token`
+
+* **Data Params**
+
+  `requestReceiver=[integer]`<br />
+
+* **Success Response:**
+
+  * **Code:** 201 <br />
+ 
+* **Error Response:**
+
+  * **Code:** 404  <br />
+
+* **Sample Call:**
+
+  ```javascript
+    fetch('http://localhost:3000/api/friendreq', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAsInVzZXJuYW1lIjoidGVzdDUiLCJwYXNzd29yZCI6InBhc3MiLCJmdWxsbmFtZSI6ImhlbGxvIiwiY3JlYXRlZEF0IjoiMjAxNi0wOS0wNFQyMzo0MToyNS41NDJaIiwidXBkYXRlZEF0IjoiMjAxNi0wOS0wNFQyMzo0MToyNS41NDJaIn0.yjfFIaKJJxHzp5UPegVwzL9rMWXsALgLTo3emwJV0-w'
+      },
+      body: {
+        requestReceiver: 25,
       }
     })
   ```
