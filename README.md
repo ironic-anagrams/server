@@ -102,7 +102,7 @@ All back-end files for ironic anagrams
   
 **Fetch Entries**
 ----
-  Returns all entries that belong to one user
+  Returns all entries that belong to a user
 
 * **URL**
 
@@ -111,6 +111,12 @@ All back-end files for ironic anagrams
 * **Method:**
   
   `GET`
+  
+*  **Request Headers**
+
+   **Required:**
+ 
+   `x-access-token`
   
 *  **URL Params**
 
@@ -125,7 +131,7 @@ All back-end files for ironic anagrams
 * **Success Response:**
 
   * **Code:** 200 <br />
-    **Content:** 
+    **Content:** Array of Entry objects
     
     ```javascript
     [
@@ -133,6 +139,7 @@ All back-end files for ironic anagrams
         id: [integer],
         userId: [integer],
         text: [string],
+        location: [string],
         createdAt: [timestamp],
         updatedAt: [timestamp] 
       }
@@ -147,11 +154,62 @@ All back-end files for ironic anagrams
 * **Sample Call:**
 
   ```javascript
-    fetch('http://localhost:3000/api/signup', {
+    fetch('http://localhost:3000/api/entries', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         'x-access-token': token
+      }
+    })
+  ```
+  
+**Create Entry**
+----
+  Creates an Entry
+
+* **URL**
+
+  /api/entries
+
+* **Method:**
+  
+  `POST`
+  
+*  **URL Params**
+
+   None
+   
+*  **Request Headers**
+
+   **Required:**
+ 
+   `x-access-token`
+
+* **Data Params**
+
+  `text=[string]`<br />
+  `location=[string]`<br />
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+ 
+* **Error Response:**
+
+  * **Code:** 404  <br />
+
+* **Sample Call:**
+
+  ```javascript
+    fetch('http://localhost:3000/api/entries', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': token
+      },
+      body: {
+        text: 'Hello World!',
+        location: 'San Francisco, California'
       }
     })
   ```
