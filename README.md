@@ -1,5 +1,18 @@
-# server
-All back-end files for ironic anagrams
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Journal app API documentation](#journal-app-api-documentation)
+  - [**Log In**](#log-in)
+  - [**Sign Up**](#sign-up)
+  - [**Fetch Entries**](#fetch-entries)
+  - [**Create Entry**](#create-entry)
+  - [**Fetch Friends**](#fetch-friends)
+  - [**Find Users**](#find-users)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+# Journal app API documentation
 
 **Log In**
 ----
