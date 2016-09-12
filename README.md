@@ -9,6 +9,7 @@
 - [**Fetch Friends**](#fetch-friends)
 - [**Find Users**](#find-users)
 - [**Submit Friend Request**](#submit-friend-request)
+- [**Get Friend Requests**](#get-friend-requests)
 
 **Log In**
 ----
@@ -386,3 +387,65 @@
       }
     })
   ```
+  
+**Get Friend Request**
+----
+  Returns all all inbound friend requests
+
+* **URL**
+
+  /api/friendreq
+
+* **Method:**
+  
+  `GET`
+  
+*  **Request Headers**
+
+   **Required:**
+ 
+   `x-access-token`
+  
+*  **URL Params**
+
+   None
+
+* **Data Params**
+
+  None
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** Array of Request objects
+    
+    ```javascript
+    [
+      {
+  	    id: [integer],
+   		requestReceiver: [integer],
+    	createdAt: [timestamp],
+    	updatedAt: [timestamp],
+    	userId: [integer],
+    	user: {
+    	  fullname: [string]
+    	}
+	  }
+    ]
+    ```
+ * **Error Response:**
+
+  * **Code:** 404  <br />
+
+* **Sample Call:**
+
+  ```javascript
+    fetch('http://localhost:3000/api/friendreq', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAsInVzZXJuYW1lIjoidGVzdDUiLCJwYXNzd29yZCI6InBhc3MiLCJmdWxsbmFtZSI6ImhlbGxvIiwiY3JlYXRlZEF0IjoiMjAxNi0wOS0wNFQyMzo0MToyNS41NDJaIiwidXBkYXRlZEF0IjoiMjAxNi0wOS0wNFQyMzo0MToyNS41NDJaIn0.yjfFIaKJJxHzp5UPegVwzL9rMWXsALgLTo3emwJV0-w'
+      }
+    })
+  ```
+    
