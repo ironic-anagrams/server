@@ -126,7 +126,8 @@ All back-end files for ironic anagrams
 
   * **Code:** 200 <br />
     **Content:** 
-    `[
+    ```javascript
+    [
       { 
         id: [integer],
         userId: [integer],
@@ -134,7 +135,8 @@ All back-end files for ironic anagrams
         createdAt: [timestamp],
         updatedAt: [timestamp] 
       }
-    ]`
+    ]
+    ```
  
 * **Error Response:**
 
