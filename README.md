@@ -271,3 +271,60 @@ All back-end files for ironic anagrams
     })
   ```
 
+**Find Users**
+----
+  Returns an array of User objects that match 'username' param
+
+* **URL**
+
+  /api/users
+
+* **Method:**
+  
+  `GET`
+  
+*  **Request Headers**
+
+   **Required:**
+ 
+   `x-access-token`
+  
+*  **URL Params**
+
+   **Required:**
+   `username=[string]`
+
+* **Data Params**
+
+   None
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** Array of User objects
+    
+    ```javascript
+    [
+      { 
+        id: [integer],
+        username: [string],
+        fullname: [string],
+      }
+    ]
+    ```
+ 
+* **Error Response:**
+
+  * **Code:** 404  <br />
+
+* **Sample Call:**
+
+  ```javascript
+    fetch('http://localhost:3000/api/users?username=foo', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAsInVzZXJuYW1lIjoidGVzdDUiLCJwYXNzd29yZCI6InBhc3MiLCJmdWxsbmFtZSI6ImhlbGxvIiwiY3JlYXRlZEF0IjoiMjAxNi0wOS0wNFQyMzo0MToyNS41NDJaIiwidXBkYXRlZEF0IjoiMjAxNi0wOS0wNFQyMzo0MToyNS41NDJaIn0.yjfFIaKJJxHzp5UPegVwzL9rMWXsALgLTo3emwJV0-w'
+      }
+    })
+  ```
