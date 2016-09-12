@@ -388,7 +388,7 @@
     })
   ```
   
-**Get Friend Request**
+**Get Friend Requests**
 ----
   Returns all all inbound friend requests
 
