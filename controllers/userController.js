@@ -6,10 +6,8 @@ module.exports = {
   createUser : function(req, res, next){
     db.User.create(req.body)
       .then(function(newUser){
-        //add error handling logic
         var token = jwt.encode(newUser, 'secret');
         res.status(201).json({
-          // id: newUser.id,
           token: token
         })
       })
@@ -41,14 +39,12 @@ module.exports = {
     db.User.findOne({ where: {username: username}} )
      .then(function (user) {
         if (!user) {
-          //next(new Error('User does not exist'));
           res.status(404).json({ error: 'User does not exist' })
         } else {
             if (password === user.password){
               var token = jwt.encode(user, 'secret');
               res.json({token: token});
             } else {
-                //next(new Error('Incorrect password'));
                 res.status(401).json({error: 'Incorrect password'})
             }
         }
@@ -57,5 +53,5 @@ module.exports = {
         res.json(err);
       })
   }
-  
+
 };
