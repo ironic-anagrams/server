@@ -47,8 +47,58 @@ All back-end files for ironic anagrams
         'Content-Type': 'application/json',
       },
       body: {
-        username: this.state.username,
-        password: this.state.password
+        username: 'foo',
+        password: 'bar'
       }
     })
   ```
+# server
+All back-end files for ironic anagrams
+
+**Sign Up**
+----
+  Creates user and returns session ID
+
+* **URL**
+
+  /api/signup
+
+* **Method:**
+  
+  `POST`
+  
+*  **URL Params**
+
+   None
+
+* **Data Params**
+
+  `username=[string]`<br />
+  `fullname=[string]`<br />
+  `password=[string]`
+
+* **Success Response:**
+
+  * **Code:** 201 <br />
+    **Content:** `{ token: [string] }`
+ 
+* **Error Response:**
+
+  * **Code:** 404  <br />
+
+* **Sample Call:**
+
+  ```javascript
+    fetch('http://localhost:3000/api/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: {
+        username: 'foo',
+        fullname: 'John Smith',
+        password: 'bar'
+      }
+    })
+  ```
+
