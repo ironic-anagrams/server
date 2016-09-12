@@ -99,4 +99,57 @@ All back-end files for ironic anagrams
       }
     })
   ```
+  
+**Fetch Entries**
+----
+  Returns all entries that belong to one user
+
+* **URL**
+
+  /api/entries
+
+* **Method:**
+  
+  `GET`
+  
+*  **URL Params**
+
+   **Optional:**
+ 
+   `userId=[integer]`
+
+* **Data Params**
+
+  None
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** 
+    `[
+      { 
+        id: [integer],
+        userId: [integer],
+        text: [string],
+        createdAt: [timestamp],
+        updatedAt: [timestamp] 
+      }
+    ]`
+ 
+* **Error Response:**
+
+  * **Code:** 404  <br />
+  **Content:** `{ error: 'you are not friends'}`
+
+* **Sample Call:**
+
+  ```javascript
+    fetch('http://localhost:3000/api/signup', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': token
+      }
+    })
+  ```
 
