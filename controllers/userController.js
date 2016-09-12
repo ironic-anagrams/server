@@ -56,31 +56,6 @@ module.exports = {
       .catch(function(err){
         res.json(err);
       })
-  },
-
-  checkAuth: function(req, res, next) {
-    // checking to see if the user is authenticated
-    // grab the token in the header is any
-    // then decode the token, which we end up being the user object
-    // check to see if that user exists in the database
-    var token = req.headers['x-access-token'];
-    if (!token) {
-      //next(new Error('No token'));
-      res.status(401).json({ error: 'No token' });
-    } else {
-      var user = jwt.decode(token, 'secret');
-      db.User.findOne({ where: {username: user.username}} )
-        .then(function (user) {
-          if (user) {
-            res.send(200);
-          } else {
-            res.send(401);
-          }
-        })
-        .catch(function (error) {
-          next(error);
-        });
-    }
   }
-
+  
 };
