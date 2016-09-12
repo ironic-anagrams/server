@@ -30,7 +30,7 @@ module.exports = function(app, express) {
     }
   });
   app.get('/api/friendreq', requestController.getRequests);
-
+  app.delete('/api/friendreq', requestController.rejectRequest);
 
 
 }

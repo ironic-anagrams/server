@@ -47,6 +47,7 @@ module.exports = {
           res.status(404).json(err)
         });
     } else {
+      console.log(" IN ELSE ")
       db.Entry.findAll({ 
         where: { userId: req.user.id },
         order: [['createdAt', 'DESC']]
@@ -55,7 +56,7 @@ module.exports = {
         res.send(entries);
       })
       .catch(function(err){
-        res.status(404).json(err)
+        res.status(404).json({error: 'Error retrieving entires: ' + err});
       });
     }
   }
