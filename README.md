@@ -158,7 +158,7 @@ All back-end files for ironic anagrams
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': token
+        'x-access-token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAsInVzZXJuYW1lIjoidGVzdDUiLCJwYXNzd29yZCI6InBhc3MiLCJmdWxsbmFtZSI6ImhlbGxvIiwiY3JlYXRlZEF0IjoiMjAxNi0wOS0wNFQyMzo0MToyNS41NDJaIiwidXBkYXRlZEF0IjoiMjAxNi0wOS0wNFQyMzo0MToyNS41NDJaIn0.yjfFIaKJJxHzp5UPegVwzL9rMWXsALgLTo3emwJV0-w'
       }
     })
   ```
@@ -205,11 +205,68 @@ All back-end files for ironic anagrams
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': token
+        'x-access-token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAsInVzZXJuYW1lIjoidGVzdDUiLCJwYXNzd29yZCI6InBhc3MiLCJmdWxsbmFtZSI6ImhlbGxvIiwiY3JlYXRlZEF0IjoiMjAxNi0wOS0wNFQyMzo0MToyNS41NDJaIiwidXBkYXRlZEF0IjoiMjAxNi0wOS0wNFQyMzo0MToyNS41NDJaIn0.yjfFIaKJJxHzp5UPegVwzL9rMWXsALgLTo3emwJV0-w'
       },
       body: {
         text: 'Hello World!',
         location: 'San Francisco, California'
+      }
+    })
+  ```
+  
+**Fetch Friends**
+----
+  Returns an array of User objects
+
+* **URL**
+
+  /api/friends
+
+* **Method:**
+  
+  `GET`
+  
+*  **Request Headers**
+
+   **Required:**
+ 
+   `x-access-token`
+  
+*  **URL Params**
+
+   None
+
+* **Data Params**
+
+   None
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** Array of User objects
+    
+    ```javascript
+    [
+      { 
+        id: [integer],
+        username: [string],
+        fullname: [string],
+      }
+    ]
+    ```
+ 
+* **Error Response:**
+
+  * **Code:** 404  <br />
+
+* **Sample Call:**
+
+  ```javascript
+    fetch('http://localhost:3000/api/friends', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAsInVzZXJuYW1lIjoidGVzdDUiLCJwYXNzd29yZCI6InBhc3MiLCJmdWxsbmFtZSI6ImhlbGxvIiwiY3JlYXRlZEF0IjoiMjAxNi0wOS0wNFQyMzo0MToyNS41NDJaIiwidXBkYXRlZEF0IjoiMjAxNi0wOS0wNFQyMzo0MToyNS41NDJaIn0.yjfFIaKJJxHzp5UPegVwzL9rMWXsALgLTo3emwJV0-w'
       }
     })
   ```
